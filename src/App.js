@@ -2,37 +2,60 @@ import React from "react";
 import data from "./data.json";
 import Products from "./components/Products";
 import Filter from "./components/Filter";
+import Cart from "./components/Cart";
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       products: data.products,
+      cartItems: [],
       size: "",
       sort: "",
     };
   }
+
+  removeCart = (cart) => {
+    const cartItems = this.state.cartItems.filter(
+      (item) => item._id !== cart._id
+    );
+
+    this.setState({ cartItems });
+  };
+
+  addToCart = (product) => {
+    const cartItems = this.state.cartItems;
+    let alreadyInCart = false;
+    cartItems.forEach((item) => {
+      if (item._id === product._id) {
+        item.counter++;
+        alreadyInCart = true;
+      }
+    });
+    if (!alreadyInCart) {
+      cartItems.push({ ...product, counter: 1 });
+    }
+    this.setState({ cartItems });
+  };
 
   sortProducts = (e) => {
     const sort = e.target.value;
     console.log(e.target.value);
     this.setState({
       sort: sort,
-      products: this.state.products
-        .slice()
-        .sort((a, b) =>
-          sort === "lowest"
-            ? a.price > b.price
-              ? 1
-              : -1
-            : sort === "highest"
-            ? a.price < b.price
-              ? 1
-              : -1
-            : a._id > b._id
+      products: this.state.products.sort((a, b) =>
+        sort === "lowest"
+          ? a.price > b.price
             ? 1
             : -1
-        ),
+          : sort === "highest"
+          ? a.price < b.price
+            ? 1
+            : -1
+          : a._id > b._id
+          ? 1
+          : -1
+      ),
     });
   };
   filterProducts = (e) => {
@@ -52,8 +75,9 @@ class App extends React.Component {
       });
     }
   };
+
   render() {
-    const { size, sort } = this.state;
+    const { size, sort, cartItems } = this.state;
     return (
       <div className="grid-container">
         <header>
@@ -69,9 +93,14 @@ class App extends React.Component {
                 filterProducts={this.filterProducts}
                 sortProducts={this.sortProducts}
               />
-              <Products products={this.state.products} />
+              <Products
+                products={this.state.products}
+                addToCart={this.addToCart}
+              />
             </div>
-            <div className="sidebar">Carts</div>
+            <div className="sidebar">
+              <Cart cartItems={cartItems} removeCart={this.removeCart} />
+            </div>
           </div>
         </main>
         <footer>&copy; Copyright All Rights Reserved</footer>

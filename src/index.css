@@ -114,7 +114,9 @@ footer {
   border: 0.1rem solid #c0c0c0;
   background-color: #f0f0f0;
   cursor: pointer;
+  outline: none;
 }
+
 .button.primary {
   background-color: #ffc371;
 }
@@ -122,14 +124,77 @@ footer {
   background-color: #d8a968;
 }
 /*filter*/
-.filter{
+.filter {
   display: flex;
   justify-content: space-between;
   padding: 1rem;
   margin: 1rem;
-  border-bottom: .1rem #c0c0c0 solid;
+  border-bottom: 0.1rem #c0c0c0 solid;
 }
 
-.filter div{
+.filter div {
   flex: 1;
+}
+
+/* cart.jsx*/
+
+.cart-header {
+  text-align: center;
+  padding: 1rem;
+  margin: 1.1rem;
+  border-bottom: 0.1rem #c0c0c0 solid;
+}
+.cart-header b {
+  color: #d4881e;
+  font-size: 20px;
+}
+
+.basket {
+  max-height: 550px;
+  overflow: auto;
+  text-align: center;
+}
+
+.cart-items {
+  padding: 0;
+  width: 100%;
+  list-style: none;
+}
+.cart-items .cart-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cart-items img {
+  width: 7rem;
+  height: 10rem;
+}
+
+.cart-items li div {
+  padding: 1rem;
+}
+.btn-remove{
+  background-color: #DC2424;
+  border: 1px solid #DC2424 ;
+ font-size: 20px;
+ font-weight: bold;
+  color: #FFF;
+  cursor: pointer;
+}
+.total{
+  padding: 10px;
+  border-top: .1rem solid #c0c0c0 ;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 2.3rem;
+}
+.basket-empty{
+  margin-top: 100px;
+}
+.basketlogo{
+  width: 100px;
+  height: 100px;
+ 
+  
 }

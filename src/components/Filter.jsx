@@ -7,9 +7,9 @@ class Filter extends Component {
       <div className="filter">
         <div className="filter-count">{count} Products</div>
         <div className="filter-sort">
-          Order by price
+          Order by price {" "} 
           <select value={sort} onChange={sortProducts}>
-            <option value="">Select</option>
+            <option value=""> Select</option>
             <option value="lowest">Lowest</option>
             <option value="highest">Highest</option>
           </select>{" "}
