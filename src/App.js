@@ -5,14 +5,14 @@ import './App.css';
 function App() {
   return (
     <div className="grid-container">
-      <heder>
+      <header>
         <a href="/" >Shopping Home</a>
-      </heder>
+      </header>
      <main>
        Product List
      </main>
      <footer>
-       All right is reserved
+     &copy; Copyright All Rights Reserved  
      </footer>
     </div>
   );
