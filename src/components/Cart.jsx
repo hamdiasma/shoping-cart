@@ -3,6 +3,35 @@ import formatCurrency from "../util";
 import shop from "../assets/shop.svg";
 
 class Cart extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      toggleCheckout: false,
+      name: "",
+      adress: "",
+      email: "",
+    };
+  }
+
+  handelChange = (e) => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
+
+  handelSubmit = (e) => {
+    e.preventDefault();
+    const order = {
+      name: this.state.name,
+      email: this.state.email,
+      adress: this.state.adress,
+      cartItems: this.props.cartItems,
+    };
+    this.props.createOrder(order);
+   
+    
+
+  };
+
   render() {
     const { cartItems, removeCart } = this.props;
     return (
@@ -44,23 +73,64 @@ class Cart extends Component {
             </div>
           )}
         </div>
-        {cartItems.length ? (
-          <div className="total">
-            <div>
-              {" "}
-              Total:{" "}
-              {formatCurrency(
-                cartItems.reduce(
-                  (tot, current) => tot + current.price * current.counter,
-                  0
-                )
-              )}
+        <div>
+          {cartItems.length ? (
+            <div className="total">
+              <div>
+                {" "}
+                Total:{" "}
+                {formatCurrency(
+                  cartItems.reduce(
+                    (tot, current) => tot + current.price * current.counter,
+                    0
+                  )
+                )}
+              </div>
+              <button
+                className="button primary"
+                onClick={() => this.setState({ toggleCheckout: !this.state.toggleCheckout })}
+              >
+                Proceed
+              </button>
             </div>
-            <button className="button primary">CHECKED</button>
-          </div>
-        ) : (
-          ""
-        )}
+          ) : (
+            ""
+          )}
+        </div>
+        <div>
+          {this.state.toggleCheckout ? (
+            <div className="cart-checkout">
+              <form onSubmit={this.handelSubmit}>
+                <label htmlFor="name">Name : </label>
+                <input
+                  name="name"
+                  type="text"
+                  required
+                  onChange={this.handelChange}
+                />
+                <label htmlFor="name">Email : </label>
+                <input
+                  name="email"
+                  type="email"
+                  required
+                  onChange={this.handelChange}
+                />
+                <label htmlFor="name">Adress : </label>
+                <input
+                  name="adress"
+                  type="text"
+                  required
+                  onChange={this.handelChange}
+                />
+                <button type="submit" className="button primary">
+                  Checkout
+                </button>
+              </form>
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
     );
   }

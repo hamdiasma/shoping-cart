@@ -150,7 +150,7 @@ footer {
 }
 
 .basket {
-  max-height: 550px;
+  max-height: 350px;
   overflow: auto;
   text-align: center;
 }
@@ -173,28 +173,40 @@ footer {
 .cart-items li div {
   padding: 1rem;
 }
-.btn-remove{
-  background-color: #DC2424;
-  border: 1px solid #DC2424 ;
- font-size: 20px;
- font-weight: bold;
-  color: #FFF;
+.btn-remove {
+  background-color: #dc2424;
+  border: 1px solid #dc2424;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
   cursor: pointer;
 }
-.total{
+.total {
   padding: 10px;
-  border-top: .1rem solid #c0c0c0 ;
+  border-top: 0.1rem solid #c0c0c0;
   display: flex;
   justify-content: space-around;
   align-items: center;
   font-size: 2.3rem;
 }
-.basket-empty{
+
+.basket-empty {
   margin-top: 100px;
 }
-.basketlogo{
+.basketlogo {
   width: 100px;
   height: 100px;
- 
-  
+}
+/* checout form*/
+.cart-checkout {
+  padding: 10px;
+}
+
+.cart-checkout form {
+  display: flex;
+  flex-direction: column;
+}
+.cart-checkout form input {
+  height: 30px;
+  margin: 3px 0 15px 0;
 }
