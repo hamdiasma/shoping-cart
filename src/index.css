@@ -173,7 +173,7 @@ footer {
 .cart-items li div {
   padding: 1rem;
 }
-.btn-remove {
+.btn-remove,.close-btn {
   background-color: #dc2424;
   border: 1px solid #dc2424;
   font-size: 20px;
@@ -209,4 +209,36 @@ footer {
 .cart-checkout form input {
   height: 30px;
   margin: 3px 0 15px 0;
+}
+/*modal*/
+.product-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.product-details .image-modal {
+  flex: 1;
+  text-align: center;
+}
+
+.product-details .image-modal img {
+  min-width: 300px;
+  max-height: 80vh;
+}
+.product-description {
+  flex: 1;
+}
+.product-description .title {
+  text-align: center;
+  margin-bottom: 5rem;
+  font-size: 30px;
+  font-weight: bold;
+}
+.modal-footer {
+  margin-top: 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
