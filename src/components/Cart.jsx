@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import formatCurrency from "../util";
 import shop from "../assets/shop.svg";
+import Fade from "react-reveal/Fade";
 
 class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      toggleCheckout: false,
+      showForm: false,
       name: "",
       adress: "",
       email: "",
@@ -27,9 +28,6 @@ class Cart extends Component {
       cartItems: this.props.cartItems,
     };
     this.props.createOrder(order);
-   
-    
-
   };
 
   render() {
@@ -44,34 +42,38 @@ class Cart extends Component {
           <div className="cart cart-header">Cart is empty </div>
         )}
         <div className="basket">
+        <Fade left cascade>
           {cartItems.length ? (
-            <ul className="cart-items">
-              {cartItems.map((cart) => (
-                <li className="cart-list" key={cart._id}>
-                  <div>
-                    <img src={cart.image} alt={cart.title} />
-                  </div>
-                  <div>
-                    {" "}
-                    {formatCurrency(cart.price)} x {cart.counter}
-                  </div>
-                  <div className="right">
-                    <button
-                      className="btn-remove"
-                      onClick={() => removeCart(cart)}
-                    >
-                      REMOVE
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
+           
+              <ul className="cart-items">
+                {cartItems.map((cart) => (
+                  <li className="cart-list" key={cart._id}>
+                    <div>
+                      <img src={cart.image} alt={cart.title} />
+                    </div>
+                    <div>
+                      {" "}
+                      {formatCurrency(cart.price)} x {cart.counter}
+                    </div>
+                    <div className="right">
+                      <button
+                        className="btn-remove"
+                        onClick={() => removeCart(cart)}
+                      >
+                        REMOVE
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+         
           ) : (
             <div className="basket-empty">
               <p>Welcome to Online Shopping</p>
               <img className="basketlogo" src={shop} alt="" />
             </div>
           )}
+          </Fade>
         </div>
         <div>
           {cartItems.length ? (
@@ -88,7 +90,9 @@ class Cart extends Component {
               </div>
               <button
                 className="button primary"
-                onClick={() => this.setState({ toggleCheckout: !this.state.toggleCheckout })}
+                onClick={() =>
+                  this.setState({ showForm: !this.state.showForm })
+                }
               >
                 Proceed
               </button>
@@ -98,7 +102,9 @@ class Cart extends Component {
           )}
         </div>
         <div>
-          {this.state.toggleCheckout ? (
+        <Fade right cascade when={this.state.showForm}>
+          {this.state.showForm && cartItems.length? (
+            
             <div className="cart-checkout">
               <form onSubmit={this.handelSubmit}>
                 <label htmlFor="name">Name : </label>
@@ -127,9 +133,11 @@ class Cart extends Component {
                 </button>
               </form>
             </div>
+            
           ) : (
             ""
           )}
+          </Fade>
         </div>
       </div>
     );
