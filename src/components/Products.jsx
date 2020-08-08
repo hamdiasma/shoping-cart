@@ -58,7 +58,7 @@ class Products extends Component {
           </ul>
         </Fade>
         {this.state.product && (
-          <Modal isOpen={true}>
+          <Modal isOpen={true} key={this.state.product._id}>
             <Zoom cascade>
               <button className="close-btn" onClick={() => this.closeModal()}>close</button>{" "}
               <div className="product-details">
@@ -82,8 +82,8 @@ class Products extends Component {
                   </p>
                   <p>
                     <strong>Available Sizes</strong> <br />
-                    {this.state.product.availableSizes.map((x) => (
-                      <span>
+                    {this.state.product.availableSizes.map((x,i) => (
+                      <span key={i}>
                         {" "}
                         <button className="button">{x}</button>
                       </span>

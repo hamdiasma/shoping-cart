@@ -173,7 +173,8 @@ footer {
 .cart-items li div {
   padding: 1rem;
 }
-.btn-remove,.close-btn {
+.btn-remove,
+.close-btn {
   background-color: #dc2424;
   border: 1px solid #dc2424;
   font-size: 20px;
@@ -208,7 +209,7 @@ footer {
 }
 .cart-checkout form input {
   height: 30px;
-  margin: 3px 0 15px 0;
+  margin: 3px 0 14px 0;
 }
 /*modal*/
 .product-details {
@@ -224,9 +225,10 @@ footer {
 }
 
 .product-details .image-modal img {
-  min-width: 300px;
+  width: 240px;
   max-height: 80vh;
 }
+
 .product-description {
   flex: 1;
 }
