@@ -35,8 +35,18 @@ app.post("/api/products", async (req, res) => {
 });
 
 app.delete("/api/products/:id", async (req, res) => {
-  const productDeleted = await Product.findByIdAndDelete(req.params.id);
-  res.send("product is Deleted");
+  try {
+    if(!Product){
+      res.status(404).send("product is not found")
+    }else{
+      const productDeleted = await Product.findByIdAndDelete(req.params.id);
+      res.status(200).send("product is Deleted");
+    }
+  } catch (error) {
+    console.error(error.message);
+  }
+
+ 
 });
 
 const PORT = process.env.PORT || 5000;
