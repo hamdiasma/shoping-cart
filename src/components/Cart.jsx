@@ -28,6 +28,9 @@ class Cart extends Component {
       cartItems: this.props.cartItems,
     };
     this.props.createOrder(order);
+    
+    
+    
   };
 
   render() {
