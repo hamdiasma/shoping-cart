@@ -1,15 +1,28 @@
-const { FETCH_PRODUCTS } = require("../../actions/product/types");
+const {
+  FETCH_PRODUCTS,
+  FILTER_PRODUCTS_BY_SIZE,
+  FILTER_PRODUCTS_BYP_RICE,
+} = require("../../actions/product/types");
 
-const INITIAL_STATE = {
-  items: [],
-};
-
-const productsReducers = (state = INITIAL_STATE, action) => {
+const productsReducers = (state = {}, action) => {
   switch (action.type) {
-    case FETCH_PRODUCTS:
+    case FILTER_PRODUCTS_BY_SIZE:
       return {
         ...state,
+        size: action.payload.size,
+        filtredItems: action.payload.items,
+      };
+    case FILTER_PRODUCTS_BYP_RICE:
+      return {
+        ...state,
+        sort: action.payload.sort,
+        filtredItems: action.payload.items,
+      };
+
+    case FETCH_PRODUCTS:
+      return {
         items: action.payload,
+        filtredItems: action.payload,
       };
 
     default:
@@ -17,4 +30,4 @@ const productsReducers = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default productsReducers
+export default productsReducers;
