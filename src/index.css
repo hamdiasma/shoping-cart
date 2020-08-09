@@ -244,3 +244,29 @@ footer {
   justify-content: space-between;
   align-items: center;
 }
+
+/* order modal*/
+
+.order-details{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.success-message{
+  color: rgb(37, 129, 37);
+}
+
+.order-details ul{
+  padding: 0;
+  list-style: none;
+}
+.order-details li > div{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.order-details li > div div{
+
+ }

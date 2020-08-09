@@ -14,6 +14,7 @@ class Products extends Component {
       product: null,
     };
   }
+
   componentDidMount() {
     this.props.fetchProducts();
   }
@@ -98,7 +99,6 @@ class Products extends Component {
                       </span>
                     ))}
                   </p>
-
                   <div className="modal-footer">
                     <div className="prod-price">
                       <strong>Price: </strong>
