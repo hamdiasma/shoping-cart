@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import formatCurrency from "../util";
 import shop from "../assets/shop.svg";
 import Fade from "react-reveal/Fade";
+import {removeCart} from "../redux/actions/cart/action"
+import { connect } from "react-redux";
 
 class Cart extends Component {
   constructor(props) {
@@ -28,9 +30,6 @@ class Cart extends Component {
       cartItems: this.props.cartItems,
     };
     this.props.createOrder(order);
-    
-    
-    
   };
 
   render() {
@@ -45,9 +44,8 @@ class Cart extends Component {
           <div className="cart cart-header">Cart is empty </div>
         )}
         <div className="basket">
-        <Fade left cascade>
-          {cartItems.length ? (
-           
+          <Fade left cascade>
+            {cartItems.length ? (
               <ul className="cart-items">
                 {cartItems.map((cart) => (
                   <li className="cart-list" key={cart._id}>
@@ -69,13 +67,12 @@ class Cart extends Component {
                   </li>
                 ))}
               </ul>
-         
-          ) : (
-            <div className="basket-empty">
-              <p>Welcome to Online Shopping</p>
-              <img className="basketlogo" src={shop} alt="" />
-            </div>
-          )}
+            ) : (
+              <div className="basket-empty">
+                <p>Welcome to Online Shopping</p>
+                <img className="basketlogo" src={shop} alt="" />
+              </div>
+            )}
           </Fade>
         </div>
         <div>
@@ -105,45 +102,45 @@ class Cart extends Component {
           )}
         </div>
         <div>
-        <Fade right cascade when={this.state.showForm}>
-          {this.state.showForm && cartItems.length? (
-            
-            <div className="cart-checkout">
-              <form onSubmit={this.handelSubmit}>
-                <label htmlFor="name">Name : </label>
-                <input
-                  name="name"
-                  type="text"
-                  required
-                  onChange={this.handelChange}
-                />
-                <label htmlFor="name">Email : </label>
-                <input
-                  name="email"
-                  type="email"
-                  required
-                  onChange={this.handelChange}
-                />
-                <label htmlFor="name">Adress : </label>
-                <input
-                  name="adress"
-                  type="text"
-                  required
-                  onChange={this.handelChange}
-                />
-                <button type="submit" className="button primary">
-                  Checkout
-                </button>
-              </form>
-            </div>
-            
-          ) : (
-            ""
-          )}
+          <Fade right cascade when={this.state.showForm}>
+            {this.state.showForm && cartItems.length ? (
+              <div className="cart-checkout">
+                <form onSubmit={this.handelSubmit}>
+                  <label htmlFor="name">Name : </label>
+                  <input
+                    name="name"
+                    type="text"
+                    required
+                    onChange={this.handelChange}
+                  />
+                  <label htmlFor="name">Email : </label>
+                  <input
+                    name="email"
+                    type="email"
+                    required
+                    onChange={this.handelChange}
+                  />
+                  <label htmlFor="name">Adress : </label>
+                  <input
+                    name="adress"
+                    type="text"
+                    required
+                    onChange={this.handelChange}
+                  />
+                  <button type="submit" className="button primary">
+                    Checkout
+                  </button>
+                </form>
+              </div>
+            ) : (
+              ""
+            )}
           </Fade>
         </div>
       </div>
     );
   }
 }
-export default Cart;
+export default connect((state) => ({
+  cartItems: state.cart.cartItems,
+}),{removeCart})(Cart);
